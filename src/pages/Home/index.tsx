@@ -1,25 +1,74 @@
-// ============================================================
-// Home Page — PHASE 0 STUB
-// Full implementation in Phase 3
-// ============================================================
+import { SEO } from '../../components/common/SEO';
+import { Hero } from './components/Hero';
+import { PopularServices } from './components/PopularServices';
+import { CategoryGrid } from './components/CategoryGrid';
+import { DocumentChecker } from './components/DocumentChecker';
+import { WhyChooseUs } from './components/WhyChooseUs';
+import { LocationHours } from './components/LocationHours';
+import { HomeFAQ } from './components/HomeFAQ';
+import { business } from '../../data/business';
 
 export default function Home() {
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'GovernmentOffice',
+    name: business.name,
+    legalName: business.legalName,
+    description: business.shortDescription,
+    url: 'https://mahaesevakendra.in',
+    telephone: business.phoneNumbers[0]?.number,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: `${business.address.line1}, ${business.address.line2}`,
+      addressLocality: business.address.city,
+      addressRegion: business.address.state,
+      postalCode: business.address.pincode,
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 19.033,
+      longitude: 73.018,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        opens: '09:00',
+        closes: '22:00',
+      },
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '1466',
+    },
+    priceRange: '₹40 - ₹300',
+  };
+
   return (
-    <main style={{ minHeight: '100dvh', fontFamily: 'var(--font-sans)', padding: '2rem', background: 'var(--color-background)' }}>
-      <div style={{ maxWidth: '600px', margin: '0 auto', paddingTop: '4rem' }}>
-        <p style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
-          MAHA E-SEVA KENDRA
-        </p>
-        <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 800, color: 'var(--color-ink)', marginBottom: '1rem', lineHeight: 1.2 }}>
-          Government &amp; Online Services
-        </h1>
-        <p style={{ color: 'var(--color-muted)', marginBottom: '2rem', lineHeight: 1.6 }}>
-          Phase 0 complete. Full homepage coming in Phase 3.
-        </p>
-        <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-muted)' }}>
-          Shop No-15, Janta Market Bridge, Nerul East, Navi Mumbai — 099877 72424
-        </p>
-      </div>
-    </main>
+    <>
+      <SEO
+        title="Maha E-Seva Kendra Nerul | Government Online Services & Certificates"
+        description="Authorized government service centre in Nerul East, Navi Mumbai. Fast assistance for Aadhaar, PAN, Domicile, Income certificates, Passport, Licences. Open 9 AM – 10 PM daily."
+        schema={localBusinessSchema}
+      />
+
+      <Hero />
+      <PopularServices />
+      <CategoryGrid />
+      <DocumentChecker />
+      <WhyChooseUs />
+      <LocationHours />
+      <HomeFAQ />
+    </>
   );
 }

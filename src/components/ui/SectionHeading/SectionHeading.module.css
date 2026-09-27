@@ -1,0 +1,54 @@
+.heading-group {
+  margin-bottom: var(--space-2xl, 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  text-align: center;
+  align-items: center;
+}
+
+.align-left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.align-right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs, 4px);
+  padding: 0.3rem 0.85rem;
+  background-color: var(--color-primary-soft, #FEF3EC);
+  color: var(--color-primary, #E8650A);
+  border: 1px solid rgba(232, 101, 10, 0.2);
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.title {
+  font-size: clamp(1.6rem, 3.5vw, 2.35rem);
+  font-weight: var(--weight-bold, 700);
+  color: var(--color-ink, #1A1208);
+  line-height: var(--leading-tight, 1.2);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--color-muted, #7A6550);
+  line-height: var(--leading-relaxed, 1.625);
+  margin-top: var(--space-sm, 0.5rem);
+  margin-bottom: 0;
+  max-width: 65ch;
+}

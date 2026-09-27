@@ -1,0 +1,114 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 18, 8, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal, 400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 180ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  background-color: var(--color-surface, #ffffff);
+  border-radius: var(--radius-2xl, 20px);
+  box-shadow: var(--shadow-xl, 0 20px 25px rgba(26, 18, 8, 0.1));
+  border: 1px solid var(--color-border, #E8DDD2);
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scaleUp 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-sm {
+  max-width: 440px;
+}
+
+.modal-md {
+  max-width: 560px;
+}
+
+.modal-lg {
+  max-width: 720px;
+}
+
+.modal-xl {
+  max-width: 900px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem 1rem 1.75rem;
+  border-bottom: 1px solid var(--color-border, #E8DDD2);
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-xl, 1.25rem);
+  font-weight: var(--weight-bold, 700);
+  color: var(--color-ink, #1A1208);
+}
+
+.description {
+  margin: 0.25rem 0 0 0;
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-muted, #7A6550);
+}
+
+.close-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full, 9999px);
+  color: var(--color-muted, #7A6550);
+  cursor: pointer;
+  background-color: var(--color-surface-warm, #FBF6F1);
+  transition: background-color var(--duration-fast, 150ms) ease, color var(--duration-fast, 150ms) ease;
+  flex-shrink: 0;
+}
+
+.close-btn:hover {
+  background-color: var(--color-primary-soft, #FEF3EC);
+  color: var(--color-primary, #E8650A);
+}
+
+.close-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #E8650A);
+  outline-offset: 2px;
+}
+
+.body {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

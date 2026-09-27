@@ -1,0 +1,118 @@
+.float-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-sticky, 200);
+}
+
+@media (max-width: 768px) {
+  .float-wrapper {
+    bottom: 78px; /* Above the mobile bottom action bar */
+    right: 16px;
+  }
+}
+
+.wa-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full, 9999px);
+  background: linear-gradient(135deg, #25D366, #1EBD58);
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45), 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform var(--duration-fast, 150ms) cubic-bezier(0.16, 1, 0.3, 1), box-shadow var(--duration-fast, 150ms) ease;
+}
+
+.wa-button:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.wa-button:focus-visible {
+  outline: 3px solid var(--color-primary, #E8650A);
+  outline-offset: 4px;
+}
+
+.wa-icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full, 9999px);
+  border: 2px solid #25D366;
+  opacity: 0.8;
+  animation: waPulse 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes waPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  right: 68px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  background-color: var(--color-ink, #1A1208);
+  color: #ffffff;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-md, 10px);
+  box-shadow: var(--shadow-lg, 0 10px 15px rgba(26, 18, 8, 0.08));
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast, 150ms) ease, transform var(--duration-fast, 150ms) ease;
+}
+
+.tooltip strong {
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-bold, 700);
+}
+
+.tooltip span {
+  font-size: 0.7rem;
+  color: var(--color-muted-light, #A8967E);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 0 5px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--color-ink, #1A1208);
+}
+
+.wa-button:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 640px) {
+  .tooltip {
+    display: none;
+  }
+}

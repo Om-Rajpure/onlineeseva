@@ -26,7 +26,7 @@ export const business: BusinessConfig = {
     {
       number: '09987772424',
       display: '099877 72424',
-      whatsapp: true,
+      whatsapp: true,   // ✅ Owner confirmed: this is the WhatsApp number
     },
     {
       number: '08850772424',
@@ -34,23 +34,31 @@ export const business: BusinessConfig = {
       whatsapp: false,
     },
   ],
-  // Business hours NOT verified by owner yet — do not display until confirmed
-  hours: [],
-  hoursVerified: false,
-  // Google Maps URL for directions — to be verified by owner
+  // ✅ Owner confirmed: Open daily 9:00 AM – 10:00 PM
+  hours: [
+    { day: 'Monday',    open: '09:00', close: '22:00' },
+    { day: 'Tuesday',   open: '09:00', close: '22:00' },
+    { day: 'Wednesday', open: '09:00', close: '22:00' },
+    { day: 'Thursday',  open: '09:00', close: '22:00' },
+    { day: 'Friday',    open: '09:00', close: '22:00' },
+    { day: 'Saturday',  open: '09:00', close: '22:00' },
+    { day: 'Sunday',    open: '09:00', close: '22:00' },
+  ],
+  hoursVerified: true,      // ✅ Confirmed by owner on 2026-09-27
+  // Google Maps URL for directions
   googleMapsUrl:
     'https://www.google.com/maps/search/Maha+E-Seva+Kendra,+Shop+No-15+Janta+Market+Bridge+Nerul+East+Navi+Mumbai',
-  // WhatsApp number — to be verified by owner
+  // ✅ Owner confirmed: primary WhatsApp is 099877 72424
   whatsappNumber: '919987772424',
   // Rating: 4.9 / 5 from 1,466 reviews at time of project planning.
-  // This value must be treated as a reference snapshot, not a live feed.
+  // Treat as reference snapshot only.
   rating: {
     score: 4.9,
     count: 1466,
-    verified: false,          // set to true only when owner confirms currency
+    verified: false,          // set to true only when owner reconfirms currency
     lastChecked: '2026-09',
   },
-  socialLinks: [],           // Not supplied — to be added after owner provides
+  socialLinks: [],           // To be added when owner provides social profiles
   serviceArea: [
     'Nerul',
     'Nerul East',
@@ -62,5 +70,5 @@ export const business: BusinessConfig = {
     'Airoli',
     'Maharashtra',
   ],
-  lastVerified: '2026-09-27', // Date of documentation; owner to re-verify before launch
+  lastVerified: '2026-09-27',
 };

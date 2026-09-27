@@ -1,0 +1,230 @@
+.section {
+  padding: 5rem 0;
+  background-color: var(--color-surface, #ffffff);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.filter-chip {
+  all: unset;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--color-surface-warm, #FBF6F1);
+  border: 1px solid var(--color-border, #E8DDD2);
+  color: var(--color-ink-secondary, #3D2C1A);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--weight-medium, 500);
+  cursor: pointer;
+  transition: all var(--duration-fast, 150ms) ease;
+}
+
+.filter-chip:hover {
+  background-color: var(--color-primary-soft, #FEF3EC);
+  border-color: var(--color-primary, #E8650A);
+  color: var(--color-primary, #E8650A);
+}
+
+.filter-chip-active {
+  background-color: var(--color-primary, #E8650A);
+  border-color: var(--color-primary, #E8650A);
+  color: #ffffff;
+  font-weight: var(--weight-semibold, 600);
+}
+
+.filter-more-link {
+  color: var(--color-primary, #E8650A);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--weight-semibold, 600);
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.filter-more-link:hover {
+  text-decoration: underline;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Card */
+.card {
+  background-color: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #E8DDD2);
+  border-radius: var(--radius-xl, 16px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-fast, 150ms) ease, box-shadow var(--duration-fast, 150ms) ease, border-color var(--duration-fast, 150ms) ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(232, 101, 10, 0.1), 0 4px 8px rgba(26, 18, 8, 0.05);
+  border-color: rgba(232, 101, 10, 0.4);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.category-tag {
+  font-size: var(--text-xs, 0.8125rem);
+  text-transform: capitalize;
+  color: var(--color-muted, #7A6550);
+  font-weight: var(--weight-medium, 500);
+}
+
+.price {
+  font-size: 1.05rem;
+  font-weight: var(--weight-extrabold, 800);
+  color: var(--color-primary, #E8650A);
+  background-color: var(--color-primary-soft, #FEF3EC);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm, 8px);
+}
+
+.service-title {
+  font-size: 1.125rem;
+  font-weight: var(--weight-bold, 700);
+  margin: 0 0 0.5rem 0;
+  line-height: var(--leading-snug, 1.375);
+}
+
+.title-link {
+  color: var(--color-ink, #1A1208);
+  text-decoration: none;
+  transition: color var(--duration-fast, 150ms) ease;
+}
+
+.title-link:hover {
+  color: var(--color-primary, #E8650A);
+}
+
+.service-desc {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-muted, #7A6550);
+  line-height: var(--leading-normal, 1.5);
+  margin: 0 0 1rem 0;
+  flex: 1;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-surface-warm, #FBF6F1);
+}
+
+.govt-fee-note {
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-warning, #B45309);
+  font-weight: var(--weight-medium, 500);
+}
+
+.verified-tag {
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-success, #2D7D46);
+  font-weight: var(--weight-medium, 500);
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-details {
+  flex: 1;
+  text-align: center;
+  padding: 0.55rem 0.75rem;
+  background-color: var(--color-surface-warm, #FBF6F1);
+  color: var(--color-ink, #1A1208);
+  border-radius: var(--radius-md, 10px);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-semibold, 600);
+  text-decoration: none;
+  transition: background-color var(--duration-fast, 150ms) ease;
+}
+
+.btn-details:hover {
+  background-color: var(--color-primary-soft, #FEF3EC);
+  color: var(--color-primary, #E8650A);
+}
+
+.btn-whatsapp-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.55rem 0.85rem;
+  background-color: var(--color-whatsapp, #25D366);
+  color: #ffffff;
+  border-radius: var(--radius-md, 10px);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-semibold, 600);
+  text-decoration: none;
+  transition: background-color var(--duration-fast, 150ms) ease;
+}
+
+.btn-whatsapp-sm:hover {
+  background-color: var(--color-whatsapp-hover, #1EBD58);
+}
+
+/* Bottom CTA */
+.bottom-cta {
+  margin-top: 3.5rem;
+  padding: 1.75rem;
+  border-radius: var(--radius-xl, 16px);
+  background-color: var(--color-surface-warm, #FBF6F1);
+  border: 1px dashed var(--color-border-strong, #D4C4B0);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bottom-cta p {
+  margin: 0;
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-muted, #7A6550);
+}
+
+.btn-all-services {
+  color: var(--color-primary, #E8650A);
+  font-weight: var(--weight-bold, 700);
+  font-size: var(--text-base, 1rem);
+  text-decoration: none;
+}
+
+.btn-all-services:hover {
+  text-decoration: underline;
+}
