@@ -18,6 +18,10 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -29,6 +33,20 @@ body {
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 img, video {
@@ -120,20 +138,20 @@ p {
 /* ---- Container ---- */
 .container {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: var(--container-max, 1560px);
   margin-inline: auto;
-  padding-inline: var(--container-padding-mobile);
+  padding-inline: var(--container-padding-mobile, 1rem);
 }
 
 @media (min-width: 768px) {
   .container {
-    padding-inline: var(--container-padding-tablet);
+    padding-inline: var(--container-padding-tablet, 1.5rem);
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding-inline: var(--container-padding-desktop);
+    padding-inline: var(--container-padding-desktop, 2rem);
   }
 }
 

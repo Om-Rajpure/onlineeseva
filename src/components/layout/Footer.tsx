@@ -33,7 +33,7 @@ export function Footer() {
           <div className={styles['banner-text']}>
             <h2 className={styles['banner-title']}>Need help with your documents or application?</h2>
             <p className={styles['banner-desc']}>
-              Visit our Kendra at Nerul East or message us on WhatsApp for fast, guided assistance.
+              Visit our Kendra at Shop No-15, Janta Market Bridge, Nerul East or message us on WhatsApp for fast, guided assistance.
             </p>
           </div>
           <div className={styles['banner-actions']}>
@@ -104,9 +104,12 @@ export function Footer() {
             <ul className={styles['link-list']}>
               <li><Link to="/" className={styles.link}>Home</Link></li>
               <li><Link to="/services" className={styles.link}>All 32 Services</Link></li>
+              <li><Link to="/schemes" className={styles.link}>Government Schemes</Link></li>
+              <li><Link to="/documents" className={styles.link}>Document Checklists</Link></li>
+              <li><Link to="/blog" className={styles.link}>Helpful Guides &amp; Blog</Link></li>
               <li><Link to="/about" className={styles.link}>About Our Kendra</Link></li>
-              <li><Link to="/faq" className={styles.link}>Frequently Asked Questions</Link></li>
-              <li><Link to="/contact" className={styles.link}>Contact & Location</Link></li>
+              <li><Link to="/faq" className={styles.link}>FAQs</Link></li>
+              <li><Link to="/contact" className={styles.link}>Contact &amp; Location</Link></li>
             </ul>
           </div>
 
@@ -148,23 +151,22 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Disclaimer Section as per PRD §2.1 */}
-        <div className={styles.disclaimer}>
-          <div className={styles['disclaimer-badge']}>STATUTORY CLARIFICATION</div>
-          <p className={styles['disclaimer-text']}>
-            <strong>Maha E-Seva Kendra (Nerul)</strong> is a citizen service assistance and facilitation center providing document processing, application submission, and online government portal support for citizens. We are an authorized facilitator helping citizens apply on official portals (such as Aaple Sarkar, UIDAI, NSDL, UTIITSL, Sarathi, etc.). Official government processing fees are determined by respective state and central authorities.
-          </p>
-        </div>
-
-        {/* Copyright & Bottom Bar */}
-        <div className={styles.bottom}>
-          <p className={styles.copyright}>
-            © {currentYear} {business.name}. All rights reserved. Serving Nerul & Navi Mumbai with pride.
-          </p>
-          <div className={styles['bottom-links']}>
-            <Link to="/contact" className={styles['bottom-link']}>Help & Support</Link>
-            <span className={styles['bottom-sep']}>•</span>
-            <Link to="/faq" className={styles['bottom-link']}>FAQs</Link>
+        {/* Bottom Bar / Disclaimer */}
+        <div className={styles['bottom-bar']}>
+          <div className={styles['disclaimer-box']}>
+            <p>
+              <strong>Disclaimer:</strong> Maha E-Seva Kendra (Shop No-15, Nerul East) is an authorized citizen facilitation centre providing guided online application and documentation services for government schemes, certificates, and digital services. All government application fees, rules, and approvals are governed strictly by respective government departments.
+            </p>
+          </div>
+          <div className={styles['copyright-row']}>
+            <p>© {currentYear} Maha E-Seva Kendra, Nerul East, Navi Mumbai. All rights reserved.</p>
+            <div className={styles['footer-meta-links']}>
+              <Link to="/about" className={styles['meta-link']}>About</Link>
+              <span className={styles['meta-sep']}>•</span>
+              <Link to="/faq" className={styles['meta-link']}>FAQ</Link>
+              <span className={styles['meta-sep']}>•</span>
+              <Link to="/contact" className={styles['meta-link']}>Contact</Link>
+            </div>
           </div>
         </div>
       </Container>

@@ -82,6 +82,10 @@ export interface Service {
   relatedArticles?: string[];
   /** Icon name from Lucide React */
   icon?: string;
+  /** Service card and detail image URL */
+  image?: string;
+  /** Alt text for accessibility */
+  imageAlt?: string;
 }
 
 // ------- Service Category Config -------

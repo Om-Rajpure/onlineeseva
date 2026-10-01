@@ -1,13 +1,7 @@
-// ============================================================
-// Maha E-Seva Kendra — Application Router
-// Source: Technical Architecture §5, Implementation Phases §2
-// ============================================================
-
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Layout } from '../../components/layout';
 
-// Lazy-load page components for code splitting (Performance §17)
 const Home = lazy(() => import('../../pages/Home'));
 const Services = lazy(() => import('../../pages/Services'));
 const ServiceDetail = lazy(() => import('../../pages/ServiceDetail'));
@@ -15,12 +9,12 @@ const Schemes = lazy(() => import('../../pages/Schemes'));
 const SchemeDetail = lazy(() => import('../../pages/SchemeDetail'));
 const Blog = lazy(() => import('../../pages/Blog'));
 const Article = lazy(() => import('../../pages/Article'));
+const Documents = lazy(() => import('../../pages/Documents'));
 const About = lazy(() => import('../../pages/About'));
 const FAQ = lazy(() => import('../../pages/FAQ'));
 const Contact = lazy(() => import('../../pages/Contact'));
 const NotFound = lazy(() => import('../../pages/NotFound'));
 
-// Minimal PageLoader shown during route transition
 function PageLoader() {
   return (
     <div
@@ -47,7 +41,6 @@ function withSuspense(Component: React.ComponentType) {
   );
 }
 
-// Root layout element with Navbar, Outlet, Footer, WhatsAppFloat, MobileActionBar
 function RootLayout() {
   return (
     <Layout>
@@ -88,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: 'blog/:slug',
         element: withSuspense(Article),
+      },
+      {
+        path: 'documents',
+        element: withSuspense(Documents),
       },
       {
         path: 'about',

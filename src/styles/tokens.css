@@ -109,7 +109,7 @@
   --shadow-focus: 0 0 0 3px rgba(232, 101, 10, 0.25);
 
   /* ---- Container ---- */
-  --container-max: 1200px;
+  --container-max: 1560px;
   --container-padding-mobile: 1rem;      /* 16px */
   --container-padding-tablet: 1.5rem;    /* 24px */
   --container-padding-desktop: 2rem;     /* 32px */

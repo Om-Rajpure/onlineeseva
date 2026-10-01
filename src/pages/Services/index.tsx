@@ -1,11 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { services } from '../../data/services';
 import { categories } from '../../data/categories';
 import { business } from '../../data/business';
 import { Container } from '../../components/ui/Container';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { SEO } from '../../components/common/SEO';
+import { ServiceCard } from '../../components/services';
 import styles from './Services.module.css';
 
 export default function ServicesPage() {
@@ -50,11 +51,13 @@ export default function ServicesPage() {
     return services
       .filter((s) => {
         const matchesCategory = selectedCategory === 'all' || s.category === selectedCategory;
+        const q = searchQuery.toLowerCase().trim();
         const matchesQuery =
-          searchQuery.trim() === '' ||
-          s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          s.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          s.category.toLowerCase().includes(searchQuery.toLowerCase());
+          q === '' ||
+          s.name.toLowerCase().includes(q) ||
+          s.shortDescription.toLowerCase().includes(q) ||
+          s.category.toLowerCase().includes(q) ||
+          s.documents.some((d) => d.name.toLowerCase().includes(q));
         return matchesCategory && matchesQuery;
       })
       .sort((a, b) => {
@@ -82,8 +85,8 @@ export default function ServicesPage() {
   return (
     <div className={styles.page}>
       <SEO
-        title="All 32 Government & Citizen Online Services in Nerul"
-        description="Browse all 32 government online services provided at Maha E-Seva Kendra Nerul: Aadhaar card, PAN card, Domicile, Income certificates, Passport, Licences, MSME Udyam."
+        title="All 32 Government & Citizen Online Services in Nerul | Maha E-Seva Kendra"
+        description="Browse all 32 official government online services provided at Maha E-Seva Kendra Nerul: Aadhaar card, PAN card, Domicile, Income certificates, Passport, Licences, MSME Udyam."
       />
 
       {/* Header Banner */}
@@ -92,7 +95,7 @@ export default function ServicesPage() {
           <Breadcrumbs items={[{ label: 'All Services' }]} />
           <h1 className={styles.title}>All Government &amp; Online Services</h1>
           <p className={styles.subtitle}>
-            Official assistance with 32+ citizen documents, government certificates, welfare schemes, and license applications in Nerul East, Navi Mumbai.
+            Official assistance with 32+ citizen documents, government certificates, welfare schemes, and licence applications in Nerul East, Navi Mumbai.
           </p>
         </Container>
       </div>
@@ -140,17 +143,17 @@ export default function ServicesPage() {
 
             {/* Quick Kendra Help Card */}
             <div className={styles['help-card']}>
-              <h3 className={styles['help-title']}>Need Custom Assistance?</h3>
+              <h3 className={styles['help-title']}>Need Help Finding a Service?</h3>
               <p className={styles['help-desc']}>
-                Can't find your specific form or scheme? Message our Kendra operator directly.
+                Not sure what document you need? Message our Kendra operator directly for instant guidance.
               </p>
               <a
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I need help finding a service.')}`}
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I need help finding a service and its required documents.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles['btn-wa-help']}
               >
-                Chat with Operator
+                Chat on WhatsApp
               </a>
             </div>
           </aside>
@@ -166,7 +169,7 @@ export default function ServicesPage() {
                 </svg>
                 <input
                   type="text"
-                  placeholder="Search by service name, keyword, or document..."
+                  placeholder="Search by service name (e.g. PAN, Passport, Domicile)..."
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   className={styles['search-input']}
@@ -205,7 +208,7 @@ export default function ServicesPage() {
             <div className={styles['status-bar']}>
               <span>
                 Showing <strong>{filteredServices.length}</strong> {filteredServices.length === 1 ? 'service' : 'services'}
-                {selectedCategory !== 'all' && ` in "${categories.find(c => c.id === selectedCategory)?.label}"`}
+                {selectedCategory !== 'all' && ` in "${categories.find((c) => c.id === selectedCategory)?.label}"`}
                 {searchQuery && ` matching "${searchQuery}"`}
               </span>
               {(selectedCategory !== 'all' || searchQuery) && (
@@ -222,63 +225,21 @@ export default function ServicesPage() {
               )}
             </div>
 
-            {/* Results Grid */}
+            {/* Results Grid with Uniform Height Cards */}
             {filteredServices.length > 0 ? (
               <div className={styles['services-grid']}>
                 {filteredServices.map((service) => (
-                  <article key={service.id} className={styles.card}>
-                    <div className={styles['card-top']}>
-                      <span className={styles['category-chip']}>{service.category}</span>
-                      <span className={styles['price-tag']}>{service.priceLabel}</span>
-                    </div>
-
-                    <h2 className={styles['service-name']}>
-                      <Link to={`/services/${service.slug}`} className={styles['service-link']}>
-                        {service.name}
-                      </Link>
-                    </h2>
-
-                    <p className={styles['service-desc']}>{service.shortDescription}</p>
-
-                    <div className={styles['card-middle']}>
-                      {service.governmentFee && (
-                        <div className={styles['govt-fee']}>
-                          Govt Fee: {service.governmentFee}
-                        </div>
-                      )}
-                      {service.documents && service.documents.length > 0 && (
-                        <div className={styles['docs-count']}>
-                          📋 {service.documents.length} required {service.documents.length === 1 ? 'document' : 'documents'}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className={styles['card-actions']}>
-                      <Link to={`/services/${service.slug}`} className={styles['btn-view']}>
-                        View Checklist &amp; Process
-                      </Link>
-                      <a
-                        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hello Maha E-Seva Kendra, I want to apply for ${service.name}. Please guide me.`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles['btn-wa']}
-                        aria-label={`Apply for ${service.name} via WhatsApp`}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
-                        </svg>
-                        <span>Apply</span>
-                      </a>
-                    </div>
-                  </article>
+                  <div key={service.id} className={styles['card-wrapper']}>
+                    <ServiceCard service={service} />
+                  </div>
                 ))}
               </div>
             ) : (
               <div className={styles['no-results']}>
                 <div className={styles['no-results-icon']}>🔍</div>
-                <h3>No services found</h3>
+                <h3>No service found</h3>
                 <p>
-                  We couldn't find any services matching "{searchQuery}". Try searching for terms like "Aadhaar", "PAN", "Income", "Passport", or browse by category.
+                  We couldn't find any services matching "{searchQuery}". Try searching for another service like "PAN", "Passport", "Aadhaar", "Income", "Domicile", or browse by category.
                 </p>
                 <button
                   type="button"

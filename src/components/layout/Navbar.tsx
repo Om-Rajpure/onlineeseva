@@ -27,6 +27,9 @@ export function Navbar() {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
+    { label: 'Schemes', href: '/schemes' },
+    { label: 'Documents Guide', href: '/documents' },
+    { label: 'Blog', href: '/blog' },
     { label: 'About', href: '/about' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
@@ -43,7 +46,7 @@ export function Navbar() {
               Open Daily: 9:00 AM – 10:00 PM
             </span>
             <span className={styles['topbar-sep']}>•</span>
-            <span className={styles['topbar-location']}>Shop No-15, Nerul East, Navi Mumbai</span>
+            <span className={styles['topbar-location']}>Shop No-15, Janta Market Bridge, Nerul East</span>
           </div>
           <div className={styles['topbar-right']}>
             <a href={`tel:${primaryPhone}`} className={styles['topbar-link']}>
@@ -160,26 +163,17 @@ export function Navbar() {
                 );
               })}
             </ul>
-            <div className={styles['mobile-menu-footer']}>
+            <div className={styles['mobile-actions']}>
               <a
-                href={`tel:${primaryPhone}`}
-                className={styles['mobile-call-btn']}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                <span>Call {business.phoneNumbers[0]?.display}</span>
-              </a>
-              <a
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I need assistance.')}`}
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I need assistance with an online service.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles['mobile-wa-btn']}
+                className={styles['mobile-cta-wa']}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
-                </svg>
-                <span>WhatsApp Message</span>
+                <span>WhatsApp Us Directly</span>
+              </a>
+              <a href={`tel:${primaryPhone}`} className={styles['mobile-cta-call']}>
+                <span>Call {business.phoneNumbers[0]?.display || '099877 72424'}</span>
               </a>
             </div>
           </Container>

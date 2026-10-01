@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { getServiceBySlug, getRelatedServices } from '../../data/services';
 import { getCategoryById } from '../../data/categories';
 import { business } from '../../data/business';
@@ -7,12 +7,14 @@ import { Container } from '../../components/ui/Container';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Accordion } from '../../components/ui/Accordion';
 import { SEO } from '../../components/common/SEO';
+import { ServiceCard } from '../../components/services';
 import styles from './ServiceDetail.module.css';
 
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? getServiceBySlug(slug) : null;
   const [copied, setCopied] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   if (!service) {
     return <Navigate to="/services" replace />;
@@ -27,11 +29,11 @@ export default function ServiceDetailPage() {
     {
       step: 1,
       title: 'Document Verification',
-      description: 'Visit our Kendra with your documents or send clear photos on WhatsApp for pre-verification.',
+      description: 'Visit our Kendra with your original documents or send clear photos on WhatsApp for pre-verification.',
     },
     {
       step: 2,
-      title: 'Online Application Submission',
+      title: 'Online Portal Application',
       description: 'Our certified operator accurately fills out the official government portal form and uploads necessary proofs.',
     },
     {
@@ -42,13 +44,14 @@ export default function ServiceDetailPage() {
     {
       step: 4,
       title: 'Status Tracking & Delivery',
-      description: 'We track your application progress until official issuance and deliver the printed/digital certificate.',
+      description: 'We track your application progress until official issuance and deliver the printed/digital document.',
     },
   ];
 
-  const stepsToDisplay = service.processSteps && service.processSteps.length > 0
-    ? service.processSteps
-    : defaultProcessSteps;
+  const stepsToDisplay =
+    service.processSteps && service.processSteps.length > 0
+      ? service.processSteps
+      : defaultProcessSteps;
 
   const defaultEligibility = [
     'Applicant must be an Indian citizen / Maharashtra resident where applicable.',
@@ -56,46 +59,62 @@ export default function ServiceDetailPage() {
     'Mobile number should be available to receive government OTP verifications.',
   ];
 
-  const eligibilityToDisplay = service.eligibility && service.eligibility.length > 0
-    ? service.eligibility
-    : defaultEligibility;
+  const eligibilityToDisplay =
+    service.eligibility && service.eligibility.length > 0
+      ? service.eligibility
+      : defaultEligibility;
 
   const defaultServiceFAQs = [
     {
       id: 'faq-time',
       title: `How much time does it take for ${service.name}?`,
-      content: service.processingInfo || 'Processing times depend on the respective government department verification (typically 3 to 15 working days). We provide an official tracking receipt immediately upon form submission.',
+      content:
+        service.processingInfo ||
+        'Processing times depend on the respective government department verification (typically 3 to 15 working days). We provide an official tracking receipt immediately upon form submission.',
     },
     {
       id: 'faq-xerox',
       title: 'Do I need to bring Xerox copies and passport photos?',
-      content: 'You can bring original documents directly. We have in-house high-speed scanning, Xerox copying, and instant passport size photo printing facilities at our Kendra.',
+      content:
+        'You can bring original documents directly. We have in-house high-speed scanning, Xerox copying, and instant passport size photo printing facilities at our Kendra.',
     },
     {
       id: 'faq-tracking',
       title: 'How can I check the status of my application?',
-      content: 'You will receive an official acknowledgment receipt with your Application Reference Number. You can also message us on WhatsApp with your receipt number for instant status updates.',
+      content:
+        'You will receive an official acknowledgment receipt with your Application Reference Number. You can also message us on WhatsApp with your receipt number for instant status updates.',
     },
   ];
 
-  const faqItems = service.faqs && service.faqs.length > 0
-    ? service.faqs.map((f, i) => ({ id: `s-faq-${i}`, title: f.question, content: f.answer }))
-    : defaultServiceFAQs;
+  const faqItems =
+    service.faqs && service.faqs.length > 0
+      ? service.faqs.map((f, i) => ({
+          id: `s-faq-${i}`,
+          title: f.question,
+          content: f.answer,
+        }))
+      : defaultServiceFAQs;
 
   const handleCopyChecklist = () => {
-    const text = `📋 Document Checklist for ${service.name} at Maha E-Seva Kendra:\n` +
-      `Centre Fee: ${service.priceLabel}\n` +
-      (service.governmentFee ? `Government Fee: ${service.governmentFee}\n` : '') +
-      `Required Documents:\n` +
-      (service.documents.length > 0
-        ? service.documents.map((d, i) => `${i + 1}. ${d.name} (${d.required ? 'Required' : 'Optional'})`).join('\n')
-        : '1. Original Aadhaar Card\n2. Address Proof\n3. Passport Photos') +
-      `\n\nKendra Location: ${business.address.full}\nOpen: 9:00 AM – 10:00 PM Daily\nPhone: 099877 72424`;
+    const docLines =
+      service.documents && service.documents.length > 0
+        ? service.documents
+            .map(
+              (d, i) =>
+                `${i + 1}. ${d.name} (${d.required ? 'Required' : 'Optional'})${d.note ? ' - ' + d.note : ''}`
+            )
+            .join('\n')
+        : '1. Original Aadhaar Card\n2. Address Proof\n3. Passport Photos';
+
+    const govtFeeLine = service.governmentFee ? `Government Fee: ${service.governmentFee}\n` : '';
+    const text = `📋 Document Checklist for ${service.name} at Maha E-Seva Kendra:\nCentre Fee: ${service.priceLabel}\n${govtFeeLine}Required Documents:\n${docLines}\n\nKendra Location: ${business.address.full}\nOpen: 9:00 AM – 10:00 PM Daily\nPhone: 099877 72424`;
 
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
+
+  const whatsappMessage = `Hello Maha E-Seva Kendra, I need help with ${service.name}. Please tell me the required documents and application process.`;
 
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -121,203 +140,252 @@ export default function ServiceDetailPage() {
     },
   };
 
+  const imageSrc = service.image || `/images/services/${service.slug}.jpg`;
+  const imageAlt = service.imageAlt || `${service.name} checklist and assistance at Maha E-Seva Kendra Nerul`;
+
   return (
     <div className={styles.page}>
       <SEO
         title={`${service.name} in Nerul Navi Mumbai | Fees, Documents & Process`}
-        description={`Get fast, expert assistance for ${service.name} at Maha E-Seva Kendra Nerul. Centre fee: ${service.priceLabel}. Check required documents, eligibility, and steps.`}
+        description={`Get fast, expert assistance for ${service.name} at Maha E-Seva Kendra Nerul. Centre fee: ${service.priceLabel}. Check required documents checklist, eligibility, and step-by-step process.`}
         schema={serviceSchema}
       />
 
-      {/* Header Breadcrumbs & Overview */}
+      {/* Header Banner */}
       <div className={styles['header-banner']}>
         <Container size="lg">
           <Breadcrumbs
             items={[
               { label: 'Services', href: '/services' },
-              ...(categoryConfig ? [{ label: categoryConfig.label, href: `/services?category=${categoryConfig.id}` }] : []),
+              ...(categoryConfig
+                ? [{ label: categoryConfig.label, href: `/services?category=${categoryConfig.id}` }]
+                : []),
               { label: service.name },
             ]}
           />
 
           <div className={styles['header-content']}>
             <div className={styles['header-left']}>
-              <span className={styles['category-badge']}>{categoryConfig?.label || service.category}</span>
+              <span className={styles['category-badge']}>
+                {categoryConfig?.label || service.category}
+              </span>
               <h1 className={styles.title}>{service.name}</h1>
-              <p className={styles.description}>{service.shortDescription}</p>
+              <p className={styles.description}>{service.description || service.shortDescription}</p>
             </div>
 
+            {/* Price Box */}
             <div className={styles['price-card']}>
-              <span className={styles['price-title']}>Centre Service Charge</span>
+              <span className={styles['price-label-small']}>Centre Service Charge</span>
               <div className={styles['price-value']}>{service.priceLabel}</div>
               {service.governmentFee && (
-                <div className={styles['govt-fee-badge']}>
-                  + {service.governmentFee} (Official Govt Fee)
+                <div className={styles['govt-fee-box']}>
+                  <span className={styles['govt-fee-badge']}>Government Fee</span>
+                  <span className={styles['govt-fee-text']}>{service.governmentFee}</span>
                 </div>
               )}
-              <span className={styles['pricing-guarantee']}>✓ Transparent fixed fee • No hidden costs</span>
+              <div className={styles['price-guarantee']}>
+                ✓ Zero hidden charges • Official receipt provided
+              </div>
             </div>
           </div>
         </Container>
       </div>
 
-      {/* Main Content Layout */}
-      <Container size="lg" className={styles['content-container']}>
-        <div className={styles['layout-grid']}>
-          {/* Main Info Column */}
-          <main className={styles['main-column']}>
-            {/* Required Documents Section */}
-            <section className={styles.section} id="documents">
+      {/* Main Service Content Grid */}
+      <Container size="lg" className={styles['main-container']}>
+        <div className={styles['content-layout']}>
+          {/* Left / Main Body */}
+          <main className={styles['main-body']}>
+            {/* Visual Service Banner (16:10 Ratio) */}
+            <div className={styles['visual-banner']}>
+              {!imgError ? (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  className={styles['banner-image']}
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <div className={styles['banner-fallback']}>
+                  <span>{categoryConfig?.label || service.category}</span>
+                  <h2>{service.name}</h2>
+                </div>
+              )}
+            </div>
+
+            {/* ============================================================
+                PRIMARY SECTION: DOCUMENTS REQUIRED / CHECKLIST
+               ============================================================ */}
+            <section className={styles.section} id="documents-checklist">
               <div className={styles['section-header']}>
-                <h2 className={styles['section-title']}>Required Documents &amp; Proofs</h2>
+                <div className={styles['section-title-wrap']}>
+                  <span className={styles['section-eyebrow']}>PREPARATION GUIDE</span>
+                  <h2 className={styles['section-heading']}>Documents Required (Checklist)</h2>
+                </div>
                 <button
                   type="button"
                   onClick={handleCopyChecklist}
-                  className={styles['btn-copy-sm']}
+                  className={styles['btn-copy-checklist']}
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                  </svg>
-                  <span>{copied ? '✓ Copied!' : 'Copy Document List'}</span>
+                  {copied ? '✓ Checklist Copied!' : '📋 Copy Checklist'}
                 </button>
               </div>
 
-              {service.documents && service.documents.length > 0 ? (
-                <div className={styles['docs-grid']}>
-                  {service.documents.map((doc, idx) => (
-                    <div key={idx} className={styles['doc-card']}>
-                      <div className={styles['doc-card-top']}>
-                        <span className={styles['doc-check']}>✓</span>
-                        <strong className={styles['doc-card-title']}>{doc.name}</strong>
-                        {doc.required ? (
-                          <span className={styles['badge-req']}>Mandatory</span>
-                        ) : (
-                          <span className={styles['badge-opt']}>Optional</span>
-                        )}
-                      </div>
-                      {doc.description && (
-                        <p className={styles['doc-card-desc']}>{doc.description}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className={styles['default-docs-box']}>
-                  <p>Standard documents required for this service:</p>
-                  <ul className={styles['bullet-list']}>
-                    <li>Original Aadhaar Card with linked active mobile number</li>
-                    <li>Current Address Proof (Electricity bill, Ration card, or Rent agreement)</li>
-                    <li>2 recent passport-size photographs</li>
-                  </ul>
-                </div>
-              )}
-            </section>
+              <p className={styles['checklist-intro']}>
+                Please carry the following original documents when visiting our Kendra in Nerul East. We provide on-the-spot scanning, Xerox, and passport photos.
+              </p>
 
-            {/* Step by Step Process */}
-            <section className={styles.section} id="process">
-              <h2 className={styles['section-title']}>How to Apply: Step-by-Step Procedure</h2>
-              <div className={styles['steps-timeline']}>
-                {stepsToDisplay.map((stepItem, idx) => (
-                  <div key={idx} className={styles['step-row']}>
-                    <div className={styles['step-number']}>{stepItem.step || idx + 1}</div>
-                    <div className={styles['step-body']}>
-                      <h3 className={styles['step-title']}>{stepItem.title}</h3>
-                      <p className={styles['step-desc']}>{stepItem.description}</p>
+              <div className={styles['checklist-grid']}>
+                {service.documents && service.documents.length > 0 ? (
+                  service.documents.map((doc, idx) => (
+                    <div key={idx} className={styles['checklist-item']}>
+                      <div className={styles['checklist-icon']}>✓</div>
+                      <div className={styles['checklist-details']}>
+                        <div className={styles['doc-name-row']}>
+                          <span className={styles['doc-name']}>{doc.name}</span>
+                          <span
+                            className={
+                              doc.required
+                                ? styles['badge-required']
+                                : styles['badge-optional']
+                            }
+                          >
+                            {doc.required ? 'Mandatory' : 'Optional / If Applicable'}
+                          </span>
+                        </div>
+                        {doc.note && <p className={styles['doc-note']}>{doc.note}</p>}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles['checklist-item']}>
+                    <div className={styles['checklist-icon']}>✓</div>
+                    <div className={styles['checklist-details']}>
+                      <span className={styles['doc-name']}>Aadhaar Card (Original / Copy)</span>
+                      <p className={styles['doc-note']}>Primary proof of identity and address.</p>
                     </div>
                   </div>
-                ))}
+                )}
+              </div>
+
+              <div className={styles['kendra-scan-notice']}>
+                <span className={styles['notice-icon']}>💡</span>
+                <p>
+                  <strong>Don't have photocopies or photos?</strong> No problem! Our Kendra provides in-house high-speed scanning, Xerox copying, and instant passport-size photos.
+                </p>
               </div>
             </section>
 
-            {/* Eligibility Section */}
-            <section className={styles.section} id="eligibility">
-              <h2 className={styles['section-title']}>Eligibility &amp; Guidelines</h2>
+            {/* ============================================================
+                ELIGIBILITY SECTION
+               ============================================================ */}
+            <section className={styles.section}>
+              <h2 className={styles['section-heading']}>Who is Eligible?</h2>
               <ul className={styles['eligibility-list']}>
                 {eligibilityToDisplay.map((item, idx) => (
                   <li key={idx} className={styles['eligibility-item']}>
-                    <span className={styles['check-bullet']}>✓</span>
+                    <span className={styles['bullet-icon']}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </section>
 
-            {/* Service FAQs */}
-            <section className={styles.section} id="faqs">
-              <h2 className={styles['section-title']}>Frequently Asked Questions</h2>
+            {/* ============================================================
+                HOW IT WORKS / STEP-BY-STEP PROCESS
+               ============================================================ */}
+            <section className={styles.section}>
+              <h2 className={styles['section-heading']}>How It Works at Our Kendra</h2>
+              <div className={styles['process-steps']}>
+                {stepsToDisplay.map((step) => (
+                  <div key={step.step} className={styles['process-card']}>
+                    <div className={styles['step-number']}>0{step.step}</div>
+                    <div className={styles['step-content']}>
+                      <h3 className={styles['step-title']}>{step.title}</h3>
+                      <p className={styles['step-desc']}>{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* ============================================================
+                SERVICE FAQS
+               ============================================================ */}
+            <section className={styles.section}>
+              <h2 className={styles['section-heading']}>Frequently Asked Questions</h2>
               <Accordion items={faqItems} />
             </section>
 
-            {/* Related Services */}
+            {/* ============================================================
+                RELATED SERVICES
+               ============================================================ */}
             {relatedList.length > 0 && (
-              <section className={styles.section} id="related">
-                <h2 className={styles['section-title']}>Related &amp; Complementary Services</h2>
+              <section className={styles.section}>
+                <h2 className={styles['section-heading']}>Related Citizen Services</h2>
                 <div className={styles['related-grid']}>
-                  {relatedList.map((rel) => (
-                    <Link key={rel.id} to={`/services/${rel.slug}`} className={styles['related-card']}>
-                      <span className={styles['related-cat']}>{rel.category}</span>
-                      <strong className={styles['related-name']}>{rel.name}</strong>
-                      <span className={styles['related-price']}>{rel.priceLabel} →</span>
-                    </Link>
+                  {relatedList.slice(0, 3).map((rel) => (
+                    <div key={rel.id} className={styles['related-col']}>
+                      <ServiceCard service={rel} />
+                    </div>
                   ))}
                 </div>
               </section>
             )}
           </main>
 
-          {/* Sticky Sidebar Action Card */}
-          <aside className={styles.sidebar}>
-            <div className={styles['sticky-box']}>
-              <div className={styles['box-header']}>
-                <span className={styles['kendra-badge']}>🏛️ Maha E-Seva Kendra</span>
-                <h3 className={styles['box-title']}>Apply for {service.name}</h3>
-                <div className={styles['box-price']}>{service.priceLabel}</div>
-              </div>
+          {/* Right Sticky Sidebar / Conversion Box */}
+          <aside className={styles['sidebar-col']}>
+            <div className={styles['sticky-card']}>
+              <h3 className={styles['sidebar-title']}>Need Help Applying?</h3>
+              <p className={styles['sidebar-subtitle']}>
+                Get instant guidance from our Nerul Kendra operator on WhatsApp or visit our centre directly.
+              </p>
 
-              <div className={styles['box-features']}>
-                <div className={styles['feature-row']}>
-                  <span>📍</span>
-                  <span>Shop No-15, Nerul East, Navi Mumbai</span>
-                </div>
-                <div className={styles['feature-row']}>
-                  <span>⏰</span>
-                  <span>Open Daily 9:00 AM – 10:00 PM</span>
-                </div>
-                <div className={styles['feature-row']}>
-                  <span>⚡</span>
-                  <span>Instant receipt with official tracking ID</span>
-                </div>
-              </div>
-
-              <div className={styles['box-ctas']}>
+              {/* Action Buttons */}
+              <div className={styles['action-buttons']}>
                 <a
-                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hello Maha E-Seva Kendra, I want to apply for ${service.name}. Please guide me with documents and next steps.`)}`}
+                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles['btn-sidebar-wa']}
+                  className={styles['btn-whatsapp-primary']}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
                   </svg>
-                  <span>Apply on WhatsApp</span>
+                  <span>WhatsApp Application Assistance</span>
                 </a>
 
-                <a href={`tel:${primaryPhone}`} className={styles['btn-sidebar-call']}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                  <span>Call {business.phoneNumbers[0]?.display}</span>
+                <a href={`tel:${primaryPhone}`} className={styles['btn-call-secondary']}>
+                  📞 Call: {primaryPhone}
                 </a>
 
                 <a
                   href={business.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles['btn-sidebar-directions']}
+                  className={styles['btn-directions']}
                 >
-                  Get Kendra Directions →
+                  📍 Get Directions to Kendra
                 </a>
+              </div>
+
+              {/* Kendra Timings & Location */}
+              <div className={styles['kendra-info-box']}>
+                <h4>Kendra Details</h4>
+                <p>
+                  <strong>Address:</strong>
+                  <br />
+                  {business.address.full}
+                </p>
+                <p>
+                  <strong>Opening Hours:</strong>
+                  <br />
+                  Open Daily: 9:00 AM – 10:00 PM (Monday to Sunday)
+                </p>
+                <div className={styles['google-rating-note']}>
+                  ★ <strong>4.9 / 5</strong> rating (1,466+ Google reviews)
+                </div>
               </div>
             </div>
           </aside>

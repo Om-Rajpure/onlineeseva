@@ -22,15 +22,15 @@
 }
 
 .container-sm {
-  max-width: 768px;
+  max-width: 840px;
 }
 
 .container-md {
-  max-width: 1024px;
+  max-width: 1200px;
 }
 
 .container-lg {
-  max-width: var(--container-max, 1200px);
+  max-width: var(--container-max, 1560px);
 }
 
 .container-full {
