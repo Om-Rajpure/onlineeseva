@@ -1,0 +1,5 @@
+# robots.txt for Maha E-Seva Kendra Nerul
+User-agent: *
+Allow: /
+
+Sitemap: https://mahaesevanerul.in/sitemap.xml

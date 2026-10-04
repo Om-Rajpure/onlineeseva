@@ -1,0 +1,397 @@
+/* ============================================================
+   Article Detail Page — Phase 7 Full Implementation
+   ============================================================ */
+
+.page {
+  background-color: var(--color-background, #FDF8F3);
+  min-height: 100dvh;
+  padding-bottom: 5rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, #1C2D4A 0%, #2A4365 100%);
+  color: #ffffff;
+  padding: 4rem 1.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroInner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs, 0.75rem);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary, #FF6F00);
+}
+
+.metaBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.categoryBadge {
+  background: var(--color-primary, #FF6F00);
+  color: #ffffff;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.readTime {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 500;
+}
+
+.title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.excerpt {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+.authorDateBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: var(--text-xs, 0.75rem);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Article Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.mainColumn {
+  min-width: 0;
+}
+
+.featuredImageCard {
+  border-radius: var(--radius-xl, 18px);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  max-height: 420px;
+}
+
+.featuredImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Article Content Typography */
+.articleBody {
+  background: #ffffff;
+  border-radius: var(--radius-xl, 18px);
+  padding: 2.5rem 2.25rem;
+  border: 1px solid var(--color-border, #E2E8F0);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  color: #2D3748;
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+
+.articleBody h3 {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-ink, #1A202C);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #F7FAFC;
+}
+
+.articleBody h3:first-of-type {
+  margin-top: 0;
+}
+
+.articleBody p {
+  margin-bottom: 1.25rem;
+}
+
+.articleBody ul, .articleBody ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.articleBody li {
+  margin-bottom: 0.5rem;
+}
+
+.articleBody strong {
+  color: var(--color-ink, #1A202C);
+  font-weight: 600;
+}
+
+.articleBody hr {
+  border: none;
+  border-top: 1px solid #E2E8F0;
+  margin: 2rem 0;
+}
+
+.articleBody table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.articleBody th {
+  background: #F7FAFC;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: 1px solid #E2E8F0;
+  color: var(--color-ink, #1A202C);
+  font-weight: 700;
+}
+
+.articleBody td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E2E8F0;
+}
+
+/* Callout Box */
+.calloutBox {
+  background: #FFF8E1;
+  border-left: 4px solid #FFA000;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin: 2rem 0;
+  color: #5D4037;
+}
+
+/* Author Box */
+.authorBox {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #F8FAFC;
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem;
+  margin-top: 2.5rem;
+  border: 1px solid var(--color-border, #E2E8F0);
+}
+
+.authorAvatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--color-primary, #FF6F00);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.authorName {
+  font-weight: 700;
+  color: var(--color-ink, #1A202C);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.authorBio {
+  font-size: 0.875rem;
+  color: #4A5568;
+  line-height: 1.4;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.sidebarCard {
+  background: #ffffff;
+  border-radius: var(--radius-lg, 14px);
+  border: 1px solid var(--color-border, #E2E8F0);
+  padding: 1.75rem;
+  box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.04);
+}
+
+.sidebarTitle {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-ink, #1A202C);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Service Pills */
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.servicePill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md, 8px);
+  text-decoration: none;
+  color: var(--color-ink, #2D3748);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.servicePill:hover {
+  background: #FFF3E0;
+  border-color: var(--color-primary, #FF6F00);
+  color: var(--color-primary, #FF6F00);
+  transform: translateX(3px);
+}
+
+/* Kendra Help Box */
+.kendraHelpCard {
+  background: linear-gradient(135deg, #1C2D4A 0%, #2A4365 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg, 14px);
+  padding: 1.75rem;
+  text-align: center;
+}
+
+.kendraHelpCard h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.kendraHelpCard p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.sidebarCtaBtn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-primary, #FF6F00);
+  color: #ffffff;
+  border-radius: var(--radius-md, 8px);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.sidebarCtaBtn:hover {
+  background: #E65100;
+}
+
+.sidebarSecBtn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md, 8px);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.sidebarSecBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Related Articles */
+.relatedArticlesSection {
+  max-width: 1200px;
+  margin: 3.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.relatedTitle {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-ink, #1A202C);
+  margin-bottom: 1.5rem;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 3rem 1rem 2.5rem;
+  }
+  .articleBody {
+    padding: 1.5rem 1.25rem;
+  }
+}

@@ -2,6 +2,8 @@ import { SEO } from '../../components/common/SEO';
 import { Hero } from './components/Hero';
 import { PopularServices } from './components/PopularServices';
 import { CategoryGrid } from './components/CategoryGrid';
+import { SchemesPreview } from './components/SchemesPreview';
+import { BlogPreview } from './components/BlogPreview';
 import { DocumentChecker } from './components/DocumentChecker';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { LocationHours } from './components/LocationHours';
@@ -65,7 +67,9 @@ export default function Home() {
       <Hero />
       <PopularServices />
       <CategoryGrid />
+      <SchemesPreview />
       <DocumentChecker />
+      <BlogPreview />
       <WhyChooseUs />
       <LocationHours />
       <HomeFAQ />

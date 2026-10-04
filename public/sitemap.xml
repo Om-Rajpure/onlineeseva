@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Static Pages -->
+  <url>
+    <loc>https://mahaesevanerul.in/</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/services</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/schemes</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/blog</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/documents</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/about</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/faq</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mahaesevanerul.in/contact</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 32 Service Pages -->
+  <url><loc>https://mahaesevanerul.in/services/income-certificate</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/domicile-certificate</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/caste-certificate</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/non-creamy-layer</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/ews-certificate</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/senior-citizen-card</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/pan-card</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/aadhaar-services</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/voter-id-card</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/passport-services</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/driving-licence</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/ration-card-services</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/shop-act-license</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/udyam-msme-registration</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/fssai-food-license</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/gst-services</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/police-clearance-certificate</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/gazette-name-change</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/affidavit-notary-services</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/itr-filing-assistance</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/pm-kisan-registration</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/mahadbt-scholarship-application</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/employment-exchange-registration</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/epf-services</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/pension-services</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/ayushman-bharat-card</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/jeevan-pramaan-patra</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/fastag-services</loc><priority>0.75</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/property-tax-payment</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/electricity-bill-payment</loc><priority>0.75</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/colour-photocopy-lamination</loc><priority>0.75</priority></url>
+  <url><loc>https://mahaesevanerul.in/services/digital-signature-certificate</loc><priority>0.8</priority></url>
+
+  <!-- Schemes Platform -->
+  <url><loc>https://mahaesevanerul.in/schemes/ladki-bahin-yojana</loc><priority>0.9</priority></url>
+  <url><loc>https://mahaesevanerul.in/schemes/pm-awas-yojana-urban</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/schemes/atal-pension-yojana</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/schemes/pmjjby</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/schemes/pmsby</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/schemes/mjpjay</loc><priority>0.85</priority></url>
+
+  <!-- Blog & Citizen Guides -->
+  <url><loc>https://mahaesevanerul.in/blog/income-certificate-guide-maharashtra</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/blog/pan-aadhaar-link-guide</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/blog/domicile-vs-nationality-certificate</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/blog/ladki-bahin-yojana-application-guide</loc><priority>0.85</priority></url>
+  <url><loc>https://mahaesevanerul.in/blog/fssai-food-license-registration-guide</loc><priority>0.8</priority></url>
+  <url><loc>https://mahaesevanerul.in/blog/gazette-name-change-maharashtra</loc><priority>0.8</priority></url>
+</urlset>

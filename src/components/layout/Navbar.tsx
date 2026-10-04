@@ -77,7 +77,13 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className={styles.brand} aria-label="Maha E-Seva Kendra Home">
             <div className={styles['logo-mark']}>
-              <span className={styles['logo-icon']}>🏛️</span>
+              <img
+                src="/images/e-seva Logo.jpeg"
+                alt="Maha E-Seva Kendra logo"
+                className={styles['logo-img']}
+                width={56}
+                height={56}
+              />
             </div>
             <div className={styles['brand-text']}>
               <span className={styles['brand-title']}>MAHA E-SEVA</span>
