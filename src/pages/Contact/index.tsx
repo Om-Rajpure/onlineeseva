@@ -6,9 +6,9 @@ import { schemes } from '../../data/schemes';
 import { Container } from '../../components/ui/Container';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Input, Textarea, Select } from '../../components/ui/FormField';
+import { Accordion } from '../../components/ui/Accordion';
 import { SEO } from '../../components/common/SEO';
 import styles from './Contact.module.css';
-import storefrontImg from '../../assets/storefront.jpg';
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -146,32 +146,65 @@ export function ContactPage() {
       />
 
       {/* Header Banner */}
-      <div className={styles['header-banner']}>
+      <div className={styles.headerBanner}>
         <Container size="lg">
           <Breadcrumbs items={[{ label: 'Contact Us' }]} />
           <h1 className={styles.title}>Contact &amp; Kendra Location</h1>
           <p className={styles.subtitle}>
-            Visit our Kendra in Nerul East, call our helpline, or message us on WhatsApp for rapid assistance. Open 7 days a week, 9:00 AM to 10:00 PM.
+            Visit our Kendra in Nerul East, call our helpline, or message us on WhatsApp for rapid
+            assistance. Open 7 days a week, 9:00 AM to 10:00 PM.
           </p>
         </Container>
       </div>
 
-      <Container size="lg" className={styles['content-wrap']}>
-        <div className={styles['contact-grid']}>
+      <Container size="lg" className={styles.contentWrap}>
+        {/* Trust & Guarantee Bar */}
+        <div className={styles.trustBar}>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>⭐</span>
+            <div>
+              <div className={styles.trustTitle}>4.9 / 5 Rating</div>
+              <div className={styles.trustSub}>1,466+ Verified Google Reviews</div>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>🏛️</span>
+            <div>
+              <div className={styles.trustTitle}>Authorized Centre</div>
+              <div className={styles.trustSub}>Certified Aaple Sarkar Facilitators</div>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>🖨️</span>
+            <div>
+              <div className={styles.trustTitle}>In-House Facilities</div>
+              <div className={styles.trustSub}>Xerox, Scanning &amp; Color Photo Studio</div>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>🔒</span>
+            <div>
+              <div className={styles.trustTitle}>Data Confidentiality</div>
+              <div className={styles.trustSub}>100% Secure Document Handling</div>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.contactGrid}>
           {/* Left Column: Form & Online Inquiry */}
-          <div className={styles['form-column']}>
-            <div className={styles['card-box']}>
-              <div className={styles['form-header']}>
-                <span className={styles['form-badge']}>Fast Response</span>
-                <h2 className={styles['form-title']}>Send an Inquiry or Document Request</h2>
-                <p className={styles['form-desc']}>
+          <div className={styles.formColumn}>
+            <div className={styles.cardBox}>
+              <div className={styles.formHeader}>
+                <span className={styles.formBadge}>⚡ Direct Help</span>
+                <h2 className={styles.formTitle}>Send an Inquiry or Document Request</h2>
+                <p className={styles.formDesc}>
                   Fill out your details below and we will prepare your document checklist or connect with you on WhatsApp.
                 </p>
               </div>
 
               {submitted ? (
-                <div className={styles['success-box']}>
-                  <div className={styles['success-icon']}>✓</div>
+                <div className={styles.successBox}>
+                  <div className={styles.successIcon}>✓</div>
                   <h3>Thank you, {name}!</h3>
                   <p>
                     Your inquiry regarding <strong>{getSelectedServiceName()}</strong> has been recorded. For fastest instant response, you can continue directly on WhatsApp with our Kendra operator.
@@ -179,7 +212,7 @@ export function ContactPage() {
                   <button
                     type="button"
                     onClick={handleSendWhatsApp}
-                    className={styles['btn-success-wa']}
+                    className={styles.btnSuccessWa}
                   >
                     <span>Open on WhatsApp Directly</span>
                     <span aria-hidden="true">→</span>
@@ -192,7 +225,7 @@ export function ContactPage() {
                       setPhone('');
                       setMessage('');
                     }}
-                    className={styles['btn-reset-form']}
+                    className={styles.btnResetForm}
                   >
                     Send another inquiry
                   </button>
@@ -316,7 +349,7 @@ export function ContactPage() {
                     <button
                       type="button"
                       onClick={handleSendWhatsApp}
-                      className={styles['btn-wa-direct']}
+                      className={styles.btnWaDirect}
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
@@ -330,10 +363,10 @@ export function ContactPage() {
           </div>
 
           {/* Right Column: Physical Address, Phones & Timetable */}
-          <div className={styles['info-column']}>
+          <div className={styles.infoColumn}>
             {/* Storefront & Address Card */}
-            <div className={styles['card-box']}>
-              <div className={styles['photo-wrap']}>
+            <div className={styles.cardBox}>
+              <div className={styles.photoWrap}>
                 <img
                   src={storefrontImg}
                   alt="Maha E-Seva Kendra Shop No-15 storefront in Nerul East"
@@ -357,12 +390,12 @@ export function ContactPage() {
                   Navi Mumbai, Maharashtra 400706
                 </address>
 
-                <div className={styles['action-buttons']}>
+                <div className={styles.actionButtons}>
                   <a
                     href={business.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles['btn-maps']}
+                    className={styles.btnMaps}
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <polygon points="3 11 22 2 13 21 11 13 3 11" />
@@ -377,7 +410,7 @@ export function ContactPage() {
                     <span>Call Primary: {displayPhone}</span>
                   </a>
 
-                  <a href={`tel:${business.phoneNumbers[1]?.number}`} className={styles['btn-call-secondary']}>
+                  <a href={`tel:${business.phoneNumbers[1]?.number}`} className={styles.btnCallSecondary}>
                     <span>Call Secondary: {altPhone}</span>
                   </a>
                 </div>
@@ -385,20 +418,20 @@ export function ContactPage() {
             </div>
 
             {/* Operating Hours Card */}
-            <div className={styles['card-box']}>
-              <div className={styles['hours-header']}>
-                <div className={styles['status-indicator']}>
-                  <span className={styles['status-dot']} />
-                  <strong>Operating Schedule (Verified)</strong>
+            <div className={styles.cardBox}>
+              <div className={styles.hoursHeader}>
+                <div className={styles.statusIndicator}>
+                  <span className={styles.statusDot} />
+                  <strong>{isOpenNow ? 'Open Now (9 AM – 10 PM)' : 'Closed Now (Opens at 9 AM)'}</strong>
                 </div>
-                <span className={styles['hours-chip']}>Open 7 Days</span>
+                <span className={styles.hoursChip}>Open 7 Days</span>
               </div>
 
-              <div className={styles['hours-table']}>
+              <div className={styles.hoursTable}>
                 {days.map((item, idx) => (
-                  <div key={idx} className={styles['hours-row']}>
-                    <span className={styles['hours-day']}>{item.day}</span>
-                    <span className={styles['hours-val']}>{item.hours}</span>
+                  <div key={idx} className={styles.hoursRow}>
+                    <span className={styles.hoursDay}>{item.day}</span>
+                    <span className={styles.hoursVal}>{item.hours}</span>
                   </div>
                 ))}
               </div>
@@ -430,6 +463,50 @@ export function ContactPage() {
             </div>
           </div>
         </div>
+
+        {/* Landmarks & How to Reach Us */}
+        <section className={styles.landmarksCard} aria-labelledby="landmarks-title">
+          <h2 id="landmarks-title" className={styles.landmarksTitle}>
+            How to Reach Our Kendra in Nerul East
+          </h2>
+          <p className={styles.landmarksSubtitle}>
+            Easily accessible from all major public transit points across Navi Mumbai.
+          </p>
+
+          <div className={styles.directionsGrid}>
+            <div className={styles.directionItem}>
+              <div className={styles.directionIcon}>🚆</div>
+              <h3 className={styles.directionFrom}>From Nerul Railway Station (East)</h3>
+              <p className={styles.directionSteps}>
+                Exit from Nerul Railway Station East side. Walk or take an auto toward Sector 3 / Janta Market Bridge (approx. 5–7 minutes walk). Shop No-15 is located right near the bridge.
+              </p>
+            </div>
+
+            <div className={styles.directionItem}>
+              <div className={styles.directionIcon}>🚌</div>
+              <h3 className={styles.directionFrom}>From LP Bus Stop / Sion-Panvel Highway</h3>
+              <p className={styles.directionSteps}>
+                From LP (London Pride) junction, head straight along the main Nerul East arterial road toward Sector 3 / Janta Market. Landmark: Janta Market Bridge.
+              </p>
+            </div>
+
+            <div className={styles.directionItem}>
+              <div className={styles.directionIcon}>🚗</div>
+              <h3 className={styles.directionFrom}>From Seawoods / Belapur / Vashi</h3>
+              <p className={styles.directionSteps}>
+                Take Palm Beach Road or Sion-Panvel Expressway, exit into Nerul East Sector 3. Two-wheeler and car roadside parking is easily available near the market bridge.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact & Visit FAQs */}
+        <section className={styles.contactFaqSection} aria-labelledby="contact-faqs-title">
+          <h2 id="contact-faqs-title" className={styles.faqHeading}>
+            Frequently Asked Questions About Visiting Us
+          </h2>
+          <Accordion items={contactFaqs} />
+        </section>
       </Container>
     </div>
   );

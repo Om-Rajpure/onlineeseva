@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Layout } from '../../components/layout';
+import { ErrorBoundary } from '../../components/common/ErrorBoundary';
 
 const Home = lazy(() => import('../../pages/Home'));
 const Services = lazy(() => import('../../pages/Services'));
@@ -62,9 +63,11 @@ function withSuspense(Component: React.ComponentType) {
 
 function RootLayout() {
   return (
-    <Layout>
-      <Outlet />
-    </Layout>
+    <ErrorBoundary>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </ErrorBoundary>
   );
 }
 
