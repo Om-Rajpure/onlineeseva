@@ -64,11 +64,11 @@ export function Footer() {
           {/* Column 1: Brand & Business Details */}
           <div className={styles.col}>
             <div className={styles.brand}>
-              <div className={styles['logo-mark']}>🏛️</div>
-              <div>
-                <div className={styles['brand-title']}>MAHA E-SEVA KENDRA</div>
-                <div className={styles['brand-sub']}>Nerul East, Navi Mumbai</div>
-              </div>
+              <img
+                src="/images/maha-eseva-logo.png"
+                alt="Online e-Seva logo"
+                className={styles['brand-logo-img']}
+              />
             </div>
             <p className={styles.tagline}>
               Your trusted local assistance centre for government certificates, identity documents, schemes, bill payments, and online citizen services.
@@ -162,6 +162,10 @@ export function Footer() {
             <p>© {currentYear} Maha E-Seva Kendra, Nerul East, Navi Mumbai. All rights reserved.</p>
             <div className={styles['footer-meta-links']}>
               <Link to="/about" className={styles['meta-link']}>About</Link>
+              <span className={styles['meta-sep']}>•</span>
+              <Link to="/privacy" className={styles['meta-link']}>Privacy Policy</Link>
+              <span className={styles['meta-sep']}>•</span>
+              <Link to="/terms" className={styles['meta-link']}>Terms of Service</Link>
               <span className={styles['meta-sep']}>•</span>
               <Link to="/faq" className={styles['meta-link']}>FAQ</Link>
               <span className={styles['meta-sep']}>•</span>

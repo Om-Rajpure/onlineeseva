@@ -6,7 +6,8 @@ interface SEOProps {
   description?: string;
   canonical?: string;
   ogType?: string;
-  schema?: Record<string, unknown>;
+  ogImage?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 export function SEO({
@@ -14,15 +15,18 @@ export function SEO({
   description,
   canonical,
   ogType = 'website',
+  ogImage = 'https://onlineeseva.com/images/og-image.png',
   schema,
 }: SEOProps) {
   const fullTitle = title
-    ? `${title} | Maha E-Seva Kendra Nerul`
-    : `${business.name} | Government Services & Online Assistance in Nerul Navi Mumbai`;
+    ? `${title} | Online e-Seva Kendra Nerul`
+    : `${business.name} | Online e-Seva Services in Nerul Navi Mumbai`;
 
   const metaDesc =
     description ||
-    'Official facilitator for Aadhaar, PAN card, Domicile, Income certificates, Passport assistance, Driving licences and government citizen services in Nerul East, Navi Mumbai.';
+    'Online e-Seva Kendra in Nerul, Navi Mumbai. Expert assistance for Aadhaar, PAN card, Domicile, Income certificates, Passport, Driving licence, Government schemes, Banking & Insurance services.';
+
+  const canonicalUrl = canonical || `https://onlineeseva.com${window.location.pathname === '/' ? '' : window.location.pathname}`;
 
   useEffect(() => {
     // Update Title
@@ -44,16 +48,24 @@ export function SEO({
     setMetaTag('og:title', fullTitle, true);
     setMetaTag('og:description', metaDesc, true);
     setMetaTag('og:type', ogType, true);
+    setMetaTag('og:url', canonicalUrl, true);
+    setMetaTag('og:image', ogImage, true);
+    setMetaTag('og:site_name', 'Maha E-Seva Kendra | Online e-Seva', true);
 
-    if (canonical) {
-      let linkCanonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-      if (!linkCanonical) {
-        linkCanonical = document.createElement('link');
-        linkCanonical.setAttribute('rel', 'canonical');
-        document.head.appendChild(linkCanonical);
-      }
-      linkCanonical.setAttribute('href', canonical);
+    // Twitter Cards
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:title', fullTitle);
+    setMetaTag('twitter:description', metaDesc);
+    setMetaTag('twitter:image', ogImage);
+
+    // Canonical link
+    let linkCanonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!linkCanonical) {
+      linkCanonical = document.createElement('link');
+      linkCanonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(linkCanonical);
     }
+    linkCanonical.setAttribute('href', canonicalUrl);
 
     // Schema.org structured data script
     let scriptTag = document.getElementById('schema-json-ld') as HTMLScriptElement | null;
@@ -68,7 +80,7 @@ export function SEO({
     } else if (scriptTag) {
       scriptTag.remove();
     }
-  }, [fullTitle, metaDesc, canonical, ogType, schema]);
+  }, [fullTitle, metaDesc, canonicalUrl, ogType, ogImage, schema]);
 
   return null;
 }

@@ -104,6 +104,9 @@ export interface Scheme {
   slug: string;
   title: string;
   status: SchemeStatus;
+  category?: 'women-child' | 'agriculture' | 'healthcare' | 'skill-business' | 'housing' | 'social-welfare' | 'education' | 'pension-insurance';
+  department?: string;
+  financialAssistance?: string;
   summary: string;
   overview: string;
   eligibility: string[];
@@ -126,12 +129,21 @@ export interface Scheme {
 }
 
 // ------- Blog Article -------
+export interface ArticleSection {
+  heading: string;
+  body: string;
+  points?: string[];
+  callout?: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
   title: string;
   excerpt: string;
-  content: string;
+  content?: string;
+  sections?: ArticleSection[];
+  keyTakeaways?: string[];
   category: string;
   author: string;
   publishedAt: string;
@@ -143,6 +155,7 @@ export interface Article {
   readingTime: number; // in minutes
   relatedServices: string[];
   relatedArticles: string[];
+  faqs?: FAQ[];
   seo: SEOData;
   noindex?: boolean;
 }

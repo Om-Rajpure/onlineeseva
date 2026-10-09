@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { services } from '../../data/services';
 import { categories } from '../../data/categories';
@@ -20,12 +20,14 @@ export default function ServicesPage() {
 
   const whatsappNumber = business.whatsappNumber || '919987772424';
 
-  useEffect(() => {
-    const cat = searchParams.get('category');
-    const q = searchParams.get('search');
-    if (cat) setSelectedCategory(cat);
-    if (q) setSearchQuery(q);
-  }, [searchParams]);
+  const [prevParams, setPrevParams] = useState({ cat: initialCategory, q: initialSearch });
+  const paramCategory = searchParams.get('category') || 'all';
+  const paramSearch = searchParams.get('search') || '';
+  if (prevParams.cat !== paramCategory || prevParams.q !== paramSearch) {
+    setPrevParams({ cat: paramCategory, q: paramSearch });
+    if (paramCategory !== selectedCategory) setSelectedCategory(paramCategory);
+    if (paramSearch !== searchQuery) setSearchQuery(paramSearch);
+  }
 
   const handleCategoryChange = (catId: string) => {
     setSelectedCategory(catId);

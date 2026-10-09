@@ -1,11 +1,12 @@
-// 404 Not Found Page — PHASE 0 STUB — Enhanced in Phase 2
+// 404 Not Found Page
 import { Link } from 'react-router-dom';
+import { SEO } from '../../components/common/SEO';
 
 export default function NotFound() {
   return (
     <main
       style={{
-        minHeight: '100dvh',
+        minHeight: '80vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -15,7 +16,16 @@ export default function NotFound() {
         textAlign: 'center',
       }}
     >
+      <SEO
+        title="Page Not Found (404)"
+        description="The requested page could not be found on Maha E-Seva Kendra."
+      />
       <div style={{ maxWidth: '480px' }}>
+        <img
+          src="/images/maha-eseva-logo.png"
+          alt="Online e-Seva logo"
+          style={{ height: '48px', width: 'auto', objectFit: 'contain', marginBottom: '1.5rem' }}
+        />
         <p style={{ fontSize: '5rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1, marginBottom: '1rem' }}>404</p>
         <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--color-ink)', marginBottom: '0.75rem' }}>Page not found</h1>
         <p style={{ color: 'var(--color-muted)', marginBottom: '2rem' }}>

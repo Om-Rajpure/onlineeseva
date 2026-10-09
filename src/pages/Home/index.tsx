@@ -3,8 +3,10 @@ import { Hero } from './components/Hero';
 import { PopularServices } from './components/PopularServices';
 import { CategoryGrid } from './components/CategoryGrid';
 import { DocumentChecker } from './components/DocumentChecker';
+import { SchemesPreview } from './components/SchemesPreview';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { LocationHours } from './components/LocationHours';
+import { BlogPreview } from './components/BlogPreview';
 import { HomeFAQ } from './components/HomeFAQ';
 import { business } from '../../data/business';
 
@@ -66,8 +68,10 @@ export default function Home() {
       <PopularServices />
       <CategoryGrid />
       <DocumentChecker />
+      <SchemesPreview />
       <WhyChooseUs />
       <LocationHours />
+      <BlogPreview />
       <HomeFAQ />
     </>
   );

@@ -1,13 +1,14 @@
 // ============================================================
 // Maha E-Seva Kendra — SEO Utilities
 // Source: Technical Architecture §10, §11, PRD §9
+// Domain: onlineeseva.com
 // ============================================================
 
 import { business } from '../../data/business';
 
-export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://mahaesevakendra.in';
+export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://onlineeseva.com';
 export const SITE_NAME = business.displayName;
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-image.png`;
 
 export interface PageSEO {
   title: string;
@@ -41,14 +42,55 @@ export function buildServiceSEO(
 ): PageSEO {
   const canonical = getCanonicalUrl(`/services/${slug}`);
   return {
-    title: `${title} | ${SITE_NAME}`,
+    title: `${title} | Online e-Seva Services Nerul | ${SITE_NAME}`,
     description,
     canonical,
     openGraph: {
-      title: `${title} | ${SITE_NAME}`,
+      title: `${title} | Online e-Seva Services Nerul | ${SITE_NAME}`,
       description,
       image: DEFAULT_OG_IMAGE,
       type: 'website',
+    },
+  };
+}
+
+/**
+ * Build Organization structured data (JSON-LD)
+ */
+export function buildOrganizationSchema(): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: business.displayName,
+    alternateName: [business.legalName, 'Online e-Seva', 'e-Seva Kendra Nerul'],
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/maha-eseva-logo.png`,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: `+91-${business.phoneNumbers[0]?.number.replace(/^0/, '')}`,
+        contactType: 'customer service',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Marathi', 'Hindi'],
+      },
+    ],
+  };
+}
+
+/**
+ * Build WebSite structured data (JSON-LD) with SearchAction
+ */
+export function buildWebSiteSchema(): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: business.displayName,
+    alternateName: 'Online e-Seva Kendra Navi Mumbai',
+    url: SITE_URL,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/services?search={search_term_string}`,
+      'query-input': 'required name=search_term_string',
     },
   };
 }
@@ -60,18 +102,42 @@ export function buildServiceSEO(
 export function buildLocalBusinessSchema(): object {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'GovernmentPermitOrLicensingService',
+    additionalType: 'https://schema.org/LocalBusiness',
     name: business.displayName,
     alternateName: business.legalName,
+    image: `${SITE_URL}/images/maha-eseva-logo.png`,
     description: business.shortDescription,
+    priceRange: '₹40 - ₹1200',
     address: {
       '@type': 'PostalAddress',
       streetAddress: `${business.address.line1}, ${business.address.line2}`,
-      addressLocality: business.address.city,
+      addressLocality: 'Nerul, Navi Mumbai',
       addressRegion: business.address.state,
       postalCode: business.address.pincode,
       addressCountry: 'IN',
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 19.0330,
+      longitude: 73.0169,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        opens: '09:00',
+        closes: '22:00',
+      },
+    ],
     telephone: business.phoneNumbers[0]?.number,
     url: SITE_URL,
     // Only include rating if verified
@@ -84,7 +150,10 @@ export function buildLocalBusinessSchema(): object {
           },
         }
       : {}),
-    areaServed: business.serviceArea,
+    areaServed: business.serviceArea.map((area) => ({
+      '@type': 'AdministrativeArea',
+      name: area,
+    })),
   };
 }
 
@@ -101,7 +170,7 @@ export function buildBreadcrumbSchema(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url.startsWith('/') ? item.url : `/${item.url}`}`,
     })),
   };
 }

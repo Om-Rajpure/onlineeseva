@@ -26,7 +26,7 @@
 }
 
 .content-wrap {
-  margin-top: 3.5rem;
+  margin-top: 3rem;
 }
 
 .contact-grid {
@@ -108,6 +108,77 @@
   border-radius: var(--radius-md, 10px);
   font-size: var(--text-sm, 0.875rem);
   font-weight: var(--weight-medium, 500);
+}
+
+/* Radio Group: Preferred Contact */
+.radio-group-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-label {
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-semibold, 600);
+  color: var(--color-ink, #1A1208);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.radio-options {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.radio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: var(--color-surface-warm, #FBF6F1);
+  border: 1px solid var(--color-border, #E8DDD2);
+  border-radius: var(--radius-lg, 12px);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: var(--weight-medium, 500);
+  color: var(--color-ink-secondary, #3D2C1A);
+  cursor: pointer;
+  transition: all var(--duration-fast, 150ms) ease;
+}
+
+.radio-btn:hover {
+  border-color: var(--color-primary, #E8650A);
+}
+
+.radio-btn-active {
+  background-color: var(--color-primary-soft, #FEF3EC);
+  border-color: var(--color-primary, #E8650A);
+  color: var(--color-primary, #E8650A);
+  font-weight: var(--weight-bold, 700);
+}
+
+/* Privacy note */
+.privacy-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  background-color: #F8F9FA;
+  border: 1px solid var(--color-border, #E8DDD2);
+  border-radius: var(--radius-md, 10px);
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-muted, #7A6550);
+  line-height: var(--leading-normal, 1.5);
+}
+
+.privacy-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.privacy-banner p {
+  margin: 0;
 }
 
 .form-actions {
@@ -203,6 +274,9 @@
   font-size: var(--text-sm, 0.875rem);
   font-weight: var(--weight-bold, 700);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-reset-form {
@@ -255,6 +329,13 @@
   font-size: 1.15rem;
   font-weight: var(--weight-bold, 700);
   color: var(--color-ink, #1A1208);
+  margin: 0;
+}
+
+.landmark-note {
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-accent, #B5471A);
+  font-weight: var(--weight-semibold, 600);
   margin: 0;
 }
 
@@ -382,4 +463,64 @@
 .hours-val {
   color: var(--color-muted, #7A6550);
   font-weight: var(--weight-medium, 500);
+}
+
+/* Trust Signals Card */
+.trust-card {
+  background-color: var(--color-surface-warm, #FBF6F1);
+  border: 1px solid var(--color-border, #E8DDD2);
+  border-radius: var(--radius-2xl, 20px);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.rating-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rating-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.5rem;
+  font-weight: var(--weight-extrabold, 800);
+  color: var(--color-ink, #1A1208);
+}
+
+.star-gold {
+  color: #F59E0B;
+}
+
+.rating-count {
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-muted, #7A6550);
+}
+
+.trust-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-ink, #1A1208);
+  font-weight: var(--weight-medium, 500);
+}
+
+.trust-check {
+  color: var(--color-success, #2D7D46);
+  font-weight: bold;
 }

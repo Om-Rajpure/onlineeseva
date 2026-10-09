@@ -9,9 +9,11 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
     setIsOpen(false);
-  }, [location.pathname]);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,14 +77,12 @@ export function Navbar() {
       <nav className={styles.navbar} aria-label="Main navigation">
         <Container size="lg" className={styles['navbar-inner']}>
           {/* Logo */}
-          <Link to="/" className={styles.brand} aria-label="Maha E-Seva Kendra Home">
-            <div className={styles['logo-mark']}>
-              <span className={styles['logo-icon']}>🏛️</span>
-            </div>
-            <div className={styles['brand-text']}>
-              <span className={styles['brand-title']}>MAHA E-SEVA</span>
-              <span className={styles['brand-subtitle']}>KENDRA • NERUL</span>
-            </div>
+          <Link to="/" className={styles.brand} aria-label="Online e-Seva Home">
+            <img
+              src="/images/maha-eseva-logo.png"
+              alt="Online e-Seva logo"
+              className={styles['brand-logo-img']}
+            />
           </Link>
 
           {/* Desktop Nav Links */}

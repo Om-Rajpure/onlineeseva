@@ -1,0 +1,10 @@
+# Robots.txt for Maha E-Seva Kendra (onlineeseva.com)
+# Real-world citizen services centre in Nerul, Navi Mumbai
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Production Sitemap
+Sitemap: https://onlineeseva.com/sitemap.xml

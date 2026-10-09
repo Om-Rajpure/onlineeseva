@@ -13,22 +13,41 @@ const Documents = lazy(() => import('../../pages/Documents'));
 const About = lazy(() => import('../../pages/About'));
 const FAQ = lazy(() => import('../../pages/FAQ'));
 const Contact = lazy(() => import('../../pages/Contact'));
+const Privacy = lazy(() => import('../../pages/Privacy'));
+const Terms = lazy(() => import('../../pages/Terms'));
 const NotFound = lazy(() => import('../../pages/NotFound'));
 
 function PageLoader() {
   return (
     <div
       style={{
-        minHeight: '60vh',
+        minHeight: '70vh',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'var(--color-muted)',
-        fontSize: 'var(--text-sm)',
+        gap: '1rem',
+        color: 'var(--color-muted, #6B5E4C)',
+        fontSize: 'var(--text-sm, 0.875rem)',
       }}
       aria-label="Loading page"
     >
-      Loading…
+      <img
+        src="/images/maha-eseva-logo.png"
+        alt="Online e-Seva logo"
+        style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+      />
+      <div
+        style={{
+          width: '32px',
+          height: '32px',
+          border: '3px solid #E5DECA',
+          borderTopColor: '#E8650A',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }}
+      />
+      <span>Loading Online e-Seva…</span>
     </div>
   );
 }
@@ -97,6 +116,14 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: withSuspense(Contact),
+      },
+      {
+        path: 'privacy',
+        element: withSuspense(Privacy),
+      },
+      {
+        path: 'terms',
+        element: withSuspense(Terms),
       },
       {
         path: '*',
