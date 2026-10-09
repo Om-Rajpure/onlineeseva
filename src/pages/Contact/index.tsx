@@ -3,11 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 import { business } from '../../data/business';
 import { services } from '../../data/services';
 import { schemes } from '../../data/schemes';
+import { globalFAQs } from '../../data/faqs';
 import { Container } from '../../components/ui/Container';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Input, Textarea, Select } from '../../components/ui/FormField';
 import { Accordion } from '../../components/ui/Accordion';
 import { SEO } from '../../components/common/SEO';
+import storefrontImg from '../../assets/storefront.jpg';
 import styles from './Contact.module.css';
 
 export function ContactPage() {
@@ -45,6 +47,13 @@ export function ContactPage() {
     { day: 'Saturday', hours: '9:00 AM – 10:00 PM' },
     { day: 'Sunday', hours: '9:00 AM – 10:00 PM' },
   ];
+
+  const isOpenNow = true;
+  const contactFaqs = globalFAQs.slice(0, 6).map((f) => ({
+    id: f.id,
+    title: f.question,
+    content: f.answer,
+  }));
 
   const validatePhone = (p: string) => {
     const clean = p.replace(/\D/g, '');

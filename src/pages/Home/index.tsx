@@ -3,9 +3,7 @@ import { Hero } from './components/Hero';
 import { PopularServices } from './components/PopularServices';
 import { CategoryGrid } from './components/CategoryGrid';
 import { SchemesPreview } from './components/SchemesPreview';
-import { BlogPreview } from './components/BlogPreview';
 import { DocumentChecker } from './components/DocumentChecker';
-import { SchemesPreview } from './components/SchemesPreview';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { LocationHours } from './components/LocationHours';
 import { BlogPreview } from './components/BlogPreview';
@@ -19,7 +17,7 @@ export default function Home() {
     name: business.name,
     legalName: business.legalName,
     description: business.shortDescription,
-    url: 'https://mahaesevakendra.in',
+    url: 'https://onlineeseva.com',
     telephone: business.phoneNumbers[0]?.number,
     address: {
       '@type': 'PostalAddress',
@@ -55,14 +53,14 @@ export default function Home() {
       ratingValue: '4.9',
       reviewCount: '1466',
     },
-    priceRange: '₹40 - ₹300',
+    priceRange: '₹40 - ₹1200',
   };
 
   return (
     <>
       <SEO
-        title="Maha E-Seva Kendra Nerul | Government Online Services & Certificates"
-        description="Authorized government service centre in Nerul East, Navi Mumbai. Fast assistance for Aadhaar, PAN, Domicile, Income certificates, Passport, Licences. Open 9 AM – 10 PM daily."
+        title="Online e-Seva Kendra Nerul | Government Online Services & Certificates"
+        description="Authorized citizen facilitation centre in Nerul East, Navi Mumbai. Fast assistance for Aadhaar, PAN, Domicile, Income certificates, Passport, Licences. Open 9 AM – 10 PM daily."
         schema={localBusinessSchema}
       />
 
@@ -71,7 +69,6 @@ export default function Home() {
       <CategoryGrid />
       <SchemesPreview />
       <DocumentChecker />
-      <SchemesPreview />
       <WhyChooseUs />
       <LocationHours />
       <BlogPreview />

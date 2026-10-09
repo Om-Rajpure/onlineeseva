@@ -1,8 +1,11 @@
 // 404 Not Found Page
 import { Link } from 'react-router-dom';
 import { SEO } from '../../components/common/SEO';
+import { business } from '../../data/business';
 
 export default function NotFound() {
+  const whatsappNum = business.whatsappNumber || '919987772424';
+
   return (
     <main
       style={{
@@ -12,30 +15,26 @@ export default function NotFound() {
         justifyContent: 'center',
         fontFamily: 'var(--font-sans, system-ui, sans-serif)',
         padding: '3rem 1.5rem',
-        backgroundColor: 'var(--color-background, #FDF8F3)',
+        backgroundColor: 'var(--color-background, #FAF7F2)',
         textAlign: 'center',
       }}
     >
       <SEO
         title="Page Not Found (404)"
-        description="The requested page could not be found on Maha E-Seva Kendra."
+        description="The requested page could not be found on Online e-Seva Kendra."
       />
-      <div style={{ maxWidth: '480px' }}>
+      <div style={{ maxWidth: '520px' }}>
         <img
           src="/images/maha-eseva-logo.png"
           alt="Online e-Seva logo"
-          style={{ height: '48px', width: 'auto', objectFit: 'contain', marginBottom: '1.5rem' }}
+          style={{ height: '52px', width: 'auto', objectFit: 'contain', marginBottom: '1.5rem' }}
         />
-        <p style={{ fontSize: '5rem', fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1, marginBottom: '1rem' }}>404</p>
-        <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--color-ink)', marginBottom: '0.75rem' }}>Page not found</h1>
-        <p style={{ color: 'var(--color-muted)', marginBottom: '2rem' }}>
-          The page you're looking for doesn't exist or may have moved.
-        </p>
+        <p style={{ fontSize: '4.5rem', fontWeight: 800, color: 'var(--color-primary, #E8650A)', lineHeight: 1, margin: '0 0 0.5rem 0' }}>404</p>
         <h1
           style={{
             fontSize: '1.75rem',
             fontWeight: 700,
-            color: 'var(--color-ink, #1A202C)',
+            color: 'var(--color-ink, #1A1208)',
             margin: '0 0 0.75rem 0',
           }}
         >
@@ -44,13 +43,13 @@ export default function NotFound() {
         <p
           style={{
             fontSize: '0.95rem',
-            color: 'var(--color-muted, #718096)',
+            color: 'var(--color-muted, #6B5E4C)',
             lineHeight: 1.6,
             marginBottom: '2rem',
           }}
         >
-          The page you are looking for does not exist, has been removed, or is temporarily unavailable.
-          Explore our primary services or connect with us directly.
+          The page you are looking for does not exist, has been moved, or is temporarily unavailable.
+          Explore our services below or connect with us directly.
         </p>
 
         {/* Action Buttons */}
@@ -67,13 +66,13 @@ export default function NotFound() {
             to="/"
             style={{
               padding: '0.75rem 1.5rem',
-              background: 'var(--color-primary, #FF6F00)',
+              background: 'var(--color-primary, #E8650A)',
               color: '#ffffff',
               borderRadius: '8px',
               fontWeight: 700,
               fontSize: '0.875rem',
               textDecoration: 'none',
-              boxShadow: '0 4px 12px rgba(255, 111, 0, 0.25)',
+              boxShadow: '0 4px 12px rgba(232, 101, 10, 0.25)',
             }}
           >
             🏠 Return Home
@@ -82,13 +81,13 @@ export default function NotFound() {
             to="/services"
             style={{
               padding: '0.75rem 1.5rem',
-              border: '1px solid #CBD5E0',
-              backgroundColor: '#F7FAFC',
+              border: '1px solid #E5DECA',
+              backgroundColor: '#FFFFFF',
               borderRadius: '8px',
               fontWeight: 600,
               fontSize: '0.875rem',
               textDecoration: 'none',
-              color: 'var(--color-ink, #1A202C)',
+              color: 'var(--color-ink, #1A1208)',
             }}
           >
             📋 All 32 Services
@@ -97,46 +96,46 @@ export default function NotFound() {
             to="/schemes"
             style={{
               padding: '0.75rem 1.5rem',
-              border: '1px solid #CBD5E0',
-              backgroundColor: '#F7FAFC',
+              border: '1px solid #E5DECA',
+              backgroundColor: '#FFFFFF',
               borderRadius: '8px',
               fontWeight: 600,
               fontSize: '0.875rem',
               textDecoration: 'none',
-              color: 'var(--color-ink, #1A202C)',
+              color: 'var(--color-ink, #1A1208)',
             }}
           >
             🏛️ Government Schemes
           </Link>
           <Link
-            to="/blog"
+            to="/contact"
             style={{
               padding: '0.75rem 1.5rem',
-              border: '1px solid #CBD5E0',
-              backgroundColor: '#F7FAFC',
+              border: '1px solid #E5DECA',
+              backgroundColor: '#FFFFFF',
               borderRadius: '8px',
               fontWeight: 600,
               fontSize: '0.875rem',
               textDecoration: 'none',
-              color: 'var(--color-ink, #1A202C)',
+              color: 'var(--color-ink, #1A1208)',
             }}
           >
-            📚 Citizen Guides
+            📞 Contact Us
           </Link>
         </div>
 
         {/* WhatsApp Help */}
         <div
           style={{
-            borderTop: '1px solid #EDF2F7',
+            borderTop: '1px solid #E5DECA',
             paddingTop: '1.5rem',
             fontSize: '0.875rem',
-            color: '#718096',
+            color: '#6B5E4C',
           }}
         >
           <span>Need immediate assistance? </span>
           <a
-            href={`https://wa.me/91${business.whatsappNumber}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I reached a 404 page and need help finding a service.')}`}
+            href={`https://wa.me/${whatsappNum}?text=${encodeURIComponent('Hello Maha E-Seva Kendra, I reached a 404 page and need help finding a service.')}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
